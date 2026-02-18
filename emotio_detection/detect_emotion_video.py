@@ -70,8 +70,8 @@ def detect_and_predict_mask(frame, faceNet, maskNet,threshold):
 	return (locs, preds)
 
 # SETTINGS
-MASK_MODEL_PATH=os.getcwd()+"\\model\\emotion_model.h5"
-FACE_MODEL_PATH=os.getcwd()+"\\face_detector" 
+MASK_MODEL_PATH=os.path.join(os.path.dirname(os.getcwd()), "model", "emotion_model.h5")
+FACE_MODEL_PATH=os.path.join(os.path.dirname(os.getcwd()), "face_detector") 
 SOUND_PATH=os.getcwd()+"\\sounds\\alarm.wav" 
 THRESHOLD = 0.5
 

@@ -26,9 +26,9 @@ import os
 
 print(os.getcwd())
 # define constant
-dataset_path=os.getcwd()+"//dataset"
-model_path=os.getcwd()+"//model//emotion_model"
-plot_path=os.getcwd()+"//plot"
+dataset_path=os.path.join(os.path.dirname(os.getcwd()), "dataset")
+model_path=os.path.join(os.path.dirname(os.getcwd()), "model", "emotion_model")
+plot_path=os.path.join(os.path.dirname(os.getcwd()), "plot")
 
 
 # initialize the initial learning rate, number of epochs to train for,
@@ -48,7 +48,7 @@ labels = []
 # loop over the image paths
 for imagePath in imagePaths:
 	# extract the class label from the filename
-	label = imagePath.split("//")[-2]
+	label = os.path.basename(os.path.dirname(imagePath))
 
 	# load the input image (224x224) and preprocess it
 	image = load_img(imagePath, target_size=(224, 224))
@@ -104,7 +104,7 @@ for layer in baseModel.layers:
 
 # compile our model
 print("[INFO] compiling model...")
-opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+opt = Adam(learning_rate=INIT_LR)
 model.compile(loss="binary_crossentropy", optimizer=opt,
 	metrics=["accuracy"])
 

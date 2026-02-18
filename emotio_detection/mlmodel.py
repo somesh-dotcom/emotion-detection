@@ -9,7 +9,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import LinearSVC
 
-from . import Model
+try:
+    from . import Model
+except ImportError:
+    # Fallback for direct script execution
+    from __init__ import Model
 
 
 class MLModel(Model):

@@ -23,7 +23,7 @@ import time
 
 def create_dataset_folders(dataset_path,labels):
     for label in labels:
-        dataset_folder = dataset_path+"\\"+label
+        dataset_folder = os.path.join(dataset_path, label)
         if not os.path.exists(dataset_folder):
             os.makedirs(dataset_folder)
             
@@ -67,14 +67,14 @@ def detect_face(frame, faceNet,threshold=0.5):
 
 def capture_face_expression(face_expression,label,dataset_path):
     if len(face_expression)!=0:
-        dataset_folder = dataset_path+"\\"+label
+        dataset_folder = os.path.join(dataset_path, label)
         number_files = len(os.listdir(dataset_folder)) # dir is your directory path  
-        image_path  = "%s\\%s_%d.jpg"%(dataset_folder,label,number_files)      
+        image_path  = os.path.join(dataset_folder, "%s_%d.jpg"%(label,number_files))
         cv2.imwrite(image_path, face_expression)
     
 # define constant
-dataset_path=os.getcwd()+"\\dataset"
-face_model_path=os.getcwd()+"\\face_detector" 
+dataset_path=os.path.join(os.path.dirname(os.getcwd()), "dataset")
+face_model_path=os.path.join(os.path.dirname(os.getcwd()), "face_detector") 
 labels = ["neutral","happy","sad","angry"]
 
 # load our serialized face detector model from disk
